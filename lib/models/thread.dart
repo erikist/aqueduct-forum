@@ -1,8 +1,8 @@
+import 'package:aqueduct_forum_frontend/models/identifiable.dart';
 import 'package:aqueduct_forum_frontend/models/post.dart';
 import 'package:aqueduct_forum_frontend/models/topic.dart';
-import 'package:aqueduct_forum_frontend/models/user.dart';
 
-class Thread {
+class Thread implements Identifiable {
   String title;
   int id;
   int authorId;

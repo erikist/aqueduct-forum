@@ -1,9 +1,8 @@
-import 'dart:convert';
-import 'dart:mirrors';
+import 'package:aqueduct_forum_frontend/models/identifiable.dart';
 import 'package:aqueduct_forum_frontend/models/thread.dart';
 import 'package:aqueduct_forum_frontend/models/user.dart';
 
-class Post {
+class Post implements Identifiable {
   int id;
   int threadId;
   int authorId;

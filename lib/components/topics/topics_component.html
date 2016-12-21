@@ -1,0 +1,7 @@
+<bs-table [rows]="topics"
+          [(pageNumber)]="page"
+          [itemsPerPage]="itemsPerPage"
+          [sortable]="true"
+          [(totalItems)]="length">
+    <bs-column header="Title" fieldName="title"></bs-column>
+</bs-table>

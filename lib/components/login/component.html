@@ -1,24 +1,18 @@
-<div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-        <div class="panel panel-primary" style="margin-top: 20px">
-            <div class="panel-heading">
-                Login
-            </div>
-            <div class="panel-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default" (click)="onLoginPressed()">Submit</button>
-                </form>
-            </div>
-        </div>
+<div class="panel panel-primary" style="margin-top: 20px">
+    <div class="panel-heading">
+        Login
     </div>
-    <div class="col-lg-3"></div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default" (click)="onLoginPressed()">Submit</button>
+        </form>
+    </div>
 </div>

@@ -3,8 +3,7 @@ import 'package:aqueduct_forum_frontend/models/post.dart';
 import 'package:aqueduct_forum_frontend/models/thread.dart';
 import 'package:aqueduct_forum_frontend/models/topic.dart';
 
-
-class MockDataService implements _DataService {
+class MockDataService implements DataService {
 
   JSONDeserializationEngine deserializationEngine = new JSONDeserializationEngine();
 
@@ -28,7 +27,7 @@ class MockDataService implements _DataService {
   static var POST_1_BODY = "Has anyone else noticed that Joe doesn't wear shoes? Did Ludwig eat them?";
 
   @override
-  List<Post> getPostsForThread(Thread thread) {
+  List<Post> fetchPostsForThread(Thread thread) {
     if (thread.id == THREAD_1_ID) {
       return deserializationEngine.postsFromJSON(THREAD_1_POSTS_STRING);
     }
@@ -37,7 +36,7 @@ class MockDataService implements _DataService {
   }
 
   @override
-  List<Thread> getThreadsForTopic(Topic topic) {
+  List<Thread> fetchThreadsForTopic(Topic topic) {
     if (topic.id == GENERAL_TOPIC_ID) {
       return deserializationEngine.threadsFromJSON(GENERAL_THREADS_STRING);
     }
@@ -46,7 +45,7 @@ class MockDataService implements _DataService {
   }
 
   @override
-  List<Topic> getTopics() {
+  List<Topic> fetchTopics() {
     return deserializationEngine.topicsFromJSON(TOPICS_STRING);
   }
 }
@@ -105,8 +104,8 @@ abstract class _JSONDecoder<T> {
   }
 }
 
-abstract class _DataService {
-  List<Topic> getTopics();
-  List<Thread> getThreadsForTopic(Topic topic);
-  List<Post> getPostsForThread(Thread thread);
+abstract class DataService {
+  List<Topic> fetchTopics();
+  List<Thread> fetchThreadsForTopic(Topic topic);
+  List<Post> fetchPostsForThread(Thread thread);
 }
