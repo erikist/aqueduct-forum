@@ -1,0 +1,17 @@
+.topic-item {
+    color: #000;
+    background: #FFF;
+    padding: 10px 0px 10px 0px;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+.topic-item:hover {
+    background: #f3f3f3;
+}
+
+.topic-item div img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

@@ -9,10 +9,15 @@ class MockDataService implements DataService {
 
   /*For Mocking Topics*/
   static var GENERAL_TOPIC_ID = 1;
-  static var GENERAL_TOPIC_STRING = '{ "id" : $GENERAL_TOPIC_ID, "title" : "General" }';
-  static var RANDOM_TOPIC_ID = 2;
-  static var RANDOM_TOPIC_STRING = '{ "id" : $RANDOM_TOPIC_ID, "title" : "Random" }';
-  static var TOPICS_STRING = '[$GENERAL_TOPIC_STRING , $RANDOM_TOPIC_STRING]';
+  static var GENERAL_TOPIC_DESCRIPTION = "A general place for generally discussing general things. Generally pretty general with a side twist of generality";
+  static var GENERAL_TOPIC_STRING = '{ "id" : $GENERAL_TOPIC_ID, "title" : "General", "description" : "$GENERAL_TOPIC_DESCRIPTION", "imageUrl" : "$GENERAL_TOPIC_IMAGE" }';
+  static var RANDOM_TOPIC_ID = GENERAL_TOPIC_ID + 1;
+  static var RANDOM_TOPIC_DESCRIPTION = "A random place for randomly discussing random things. Randomly pretty random with a side twist of randomosity";
+  static var RANDOM_TOPIC_STRING = '{ "id" : $RANDOM_TOPIC_ID, "title" : "Random", "description" : "$RANDOM_TOPIC_DESCRIPTION", "imageUrl" : "$RANDOM_TOPIC_IMAGE" }';
+  static var TUTORIAL_TOPIC_ID = RANDOM_TOPIC_ID + 1;
+  static var TUTORIAL_TOPIC_DESCRIPTION = "Tutorials are a mechanism for learning things which allow for further introspection and development of additional skillsets.";
+  static var TUTORIAL_TOPIC_STRING = '{ "id" : $TUTORIAL_TOPIC_ID, "title" : "Tutorials", "description" : "$TUTORIAL_TOPIC_DESCRIPTION", "imageUrl" : "$TUTORIAL_TOPIC_IMAGE" }';
+  static var TOPICS_STRING = '[$GENERAL_TOPIC_STRING , $RANDOM_TOPIC_STRING, $TUTORIAL_TOPIC_STRING]';
 
   /*For Mocking Threads*/
   static var GENERAL_THREADS_STRING = '[$THREAD_1_STRING]';
@@ -23,8 +28,14 @@ class MockDataService implements DataService {
   /*For Mocking Posts*/
   static var THREAD_1_POSTS_STRING = '[$POST_1_STRING]';
   static var POST_1_ID = 1;
-  static var POST_1_STRING = '{ "id" : $POST_1_ID, "authorId" : 1, "threadId" : $THREAD_1_ID, "body" : "$POST_1_BODY", "createDate" : "${new DateTime.now().subtract(new Duration(days: 2)).toIso8601String()}" }';
+  static var POST_1_STRING = '{ "id" : $POST_1_ID, "authorId" : 1, "threadId" : $THREAD_1_ID, "body" : "$POST_1_BODY", "createDate" : "${new DateTime.now()
+      .subtract(new Duration(days: 2))
+      .toIso8601String()}" }';
   static var POST_1_BODY = "Has anyone else noticed that Joe doesn't wear shoes? Did Ludwig eat them?";
+
+  static var GENERAL_TOPIC_IMAGE = "images/homepage.png";
+  static var RANDOM_TOPIC_IMAGE = "images/chat-speech-bubbles.png";
+  static var TUTORIAL_TOPIC_IMAGE = "images/notebook.png";
 
   @override
   List<Post> fetchPostsForThread(Thread thread) {
@@ -56,7 +67,9 @@ class JSONDeserializationEngine {
   _JSONDecoder<Thread> threadDecoder = new _ThreadDecoder();
 
   List<Post> postsFromJSON(String postsJson) => postDecoder._fromList(JSON.decode(postsJson));
+
   List<Thread> threadsFromJSON(String threadsJson) => threadDecoder._fromList(JSON.decode(threadsJson));
+
   List<Topic> topicsFromJSON(String topicsJson) => topicDecoder._fromList(JSON.decode(topicsJson));
 }
 
@@ -77,7 +90,9 @@ class _TopicDecoder extends _JSONDecoder<Topic> {
   Topic _fromMap(Map jsonMap) {
     return new Topic()
       ..id = jsonMap['id']
-      ..title = jsonMap['title'];
+      ..title = jsonMap['title']
+      ..imageUrl = jsonMap['imageUrl']
+      ..description = jsonMap['description'];
   }
 }
 
@@ -95,6 +110,7 @@ class _ThreadDecoder extends _JSONDecoder<Thread> {
 
 abstract class _JSONDecoder<T> {
   T _fromMap(Map jsonMap);
+
   List<T> _fromList(List jsonMapList) {
     var objectList = <T>[];
     for (Map jsonMap in jsonMapList) {
@@ -106,6 +122,8 @@ abstract class _JSONDecoder<T> {
 
 abstract class DataService {
   List<Topic> fetchTopics();
+
   List<Thread> fetchThreadsForTopic(Topic topic);
+
   List<Post> fetchPostsForThread(Thread thread);
 }

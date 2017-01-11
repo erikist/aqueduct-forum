@@ -1,7 +1,18 @@
-<bs-table [rows]="topics"
-          [(pageNumber)]="page"
-          [itemsPerPage]="itemsPerPage"
-          [sortable]="true"
-          [(totalItems)]="length">
-    <bs-column header="Title" fieldName="title"></bs-column>
-</bs-table>
+<div class="row">
+    <div class="col-lg-1">
+
+    </div>
+    <div class="col-lg-10">
+        <div class="row topic-item" *ngFor="let topic of topics" (click)="topicClicked(topic)">
+            <div class="col-xs-1">
+                <img [src]="topic.imageUrl"/>
+            </div>
+            <div class="col-xs-11">
+                <h5 class="list-group-item-heading">{{ topic.title }}</h5>
+                <p class="list-group-item-text">{{ topic.description }}</p>            </div>
+        </div>
+    </div>
+    <div class="col-lg-1">
+
+    </div>
+</div>

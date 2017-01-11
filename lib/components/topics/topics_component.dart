@@ -9,26 +9,28 @@ import 'package:ng_bootstrap/components/pagination/pagination.dart';
 @Component(
     selector: 'topics',
     styleUrls: const ['topics_component.css'],
-    templateUrl: 'topics_component.html',
-    directives: const [BS_TABLE_DIRECTIVES])
+    templateUrl: 'topics_component.html',)
 class TopicsComponent implements OnInit {
   DataCoordinator _coordinator;
+  Router _router;
 
   List<Topic> topics = [];
 
-  num page = 1;
-  num itemsPerPage = 10;
-  num maxSize = 5;
-  num totalPages;
-  num length = 0;
-
-  TopicsComponent(DataCoordinator coordinator) {
+  TopicsComponent(DataCoordinator coordinator, Router router) {
     _coordinator = coordinator;
+    _router = router;
   }
 
   @override
   ngOnInit() {
     // TODO: implement ngOnInit
     topics.addAll(_coordinator.getTopics());
+  }
+
+  void topicClicked(Topic topic) {
+    _router.navigate([
+      'Threads',
+      {'topic_id': topic.id.toString()}
+    ]);
   }
 }

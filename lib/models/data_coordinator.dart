@@ -18,4 +18,8 @@ class DataCoordinator {
   }
 
   DataCoordinator();
+
+  Topic getTopicById(int id) {
+    return _store.getTopicList().toList().firstWhere((Topic topic) { return topic.id == id; });
+  }
 }
