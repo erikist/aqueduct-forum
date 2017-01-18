@@ -14,14 +14,14 @@
 
     </div>
     <div class="col-lg-10">
-<!--        <div class="row topic-item" *ngFor="let topic of topics" (click)="topicClicked(topic)">
+        <div class="row topic-item" *ngFor="let thread of threads" (click)="threadClicked(thread)">
             <div class="col-xs-1">
-                <img [src]="topic.imageUrl"/>
+                <img [src]="thread.imageUrl"/>
             </div>
             <div class="col-xs-11">
-                <h5 class="list-group-item-heading">{{ topic.title }}</h5>
-                <p class="list-group-item-text">{{ topic.description }}</p></div>
-        </div>-->
+                <h5 class="list-group-item-heading">{{ thread.title }}</h5>
+                <p class="list-group-item-text">{{ thread.description }}</p></div>
+        </div>
     </div>
     <div class="col-lg-1">
 

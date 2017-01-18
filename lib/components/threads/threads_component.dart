@@ -20,6 +20,7 @@ class ThreadsComponent implements OnInit {
   RouteParams _routeParams;
 
   Topic topic;
+  List<Thread> threads;
 
   ThreadsComponent(DataCoordinator coordinator, Router router, RouteParams routeParams) {
     _coordinator = coordinator;
@@ -32,5 +33,7 @@ class ThreadsComponent implements OnInit {
     var _id = _routeParams.get('topic_id');
     var id = int.parse(_id ?? '', onError: (_) => null); //TODO: improve this
     topic = _coordinator.getTopicById(id);
+
+    threads = _coordinator.getThreadsByTopic(topic);
   }
 }

@@ -20,6 +20,10 @@ class DataStore {
   List<Topic> getTopicList() {
     return _topics.all;
   }
+
+  List<Thread> getThreadsByTopic(Topic topic) {
+    return _threads.all.where((Thread thread) => thread.topicId == topic.id);
+  }
 }
 
 class _ModelStore<T extends Identifiable> {

@@ -12,4 +12,8 @@ class Thread implements Identifiable {
 
   Topic topic;
   List<Post> posts;
+
+  String get description {
+    return posts.first.body;
+  }
 }
